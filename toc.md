@@ -2,7 +2,7 @@
 
 
 
-## 第1章 ["Hello，Transformers"] (chapter1.md)
+## 第1章 ["Hello，Transformers"](chapter1.md)
 
 介绍了Transformers并将其置于背景之中。 它还提供了一个关于 "Hugging face"生态系统的介绍。 
 
