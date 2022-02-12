@@ -2,6 +2,7 @@
 第七章中的用例。 本书中美丽的插图要归功于了不起的克里斯塔-兰兹-感谢你使这本书变得格外特别。 我们也很幸运地得到了整个 "拥抱 "团队的支持。 非常感谢Quentin Lhoest回答了无数关于数据集的问题，感谢Lysandre Debut在与Hugging Face Hub有关的一切方面提供的帮助，感谢Sylvain Gugger在Accelerate方面的帮助，感谢Joe Davison在第九章关于零点学习方面的启发。 我们也感谢Sidd Karamcheti和整个Mistral团队为GPT-2增加了稳定性调整，使第十章成为可能。 本书完全是用Jupyter Notebooks编写的，我们感谢Jeremy Howard和Sylvain Gugger创造了像fastdoc这样令人愉快的工具，使之成为可能。
 
 **Lewis**
+
 致索菲亚，感谢你一直以来的支持和鼓励--没有这两点，这本书就不会存在。 经过长时间的写作，我们终于又可以享受周末的时光了! 
 
 **Leandro**
