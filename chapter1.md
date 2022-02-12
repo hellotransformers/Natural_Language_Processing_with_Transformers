@@ -30,7 +30,7 @@
 
 ![image-20220212153954110](images/chapter1/image-20220212153954110.png)
 
-&emsp;&emsp;这些架构曾经（并将继续）被广泛用于NLP任务、语音处理和时间序列。 你可以在Andrej Karpathy的博文[《循环神经网络的不可思议的有效性》]([The Unreasonable Effectiveness of Recurrent Neural Networks (karpathy.github.io)](http://karpathy.github.io/2015/05/21/rnn-effectiveness/))中找到对其能力的精彩阐述。
+&emsp;&emsp;这些架构曾经（并将继续）被广泛用于NLP任务、语音处理和时间序列。 你可以在Andrej Karpathy的博文[《循环神经网络的不可思议的有效性》](http://karpathy.github.io/2015/05/21/rnn-effectiveness/))中找到对其能力的精彩阐述。
 
 &emsp;&emsp;RNNs发挥重要作用的一个领域是机器翻译系统的开发，其目标是将一种语言的单词序列映射到另一种语言。 这类任务通常用编码器-解码器或序列-序列结构来解决，这很适合于输入和输出都是任意长度的序列的情况。 编码器的工作是将输入序列的信息编码为数字表示，通常被称为最后的隐藏状态。 然后将这个状态传递给解码器，由其产生输出序列。
 
