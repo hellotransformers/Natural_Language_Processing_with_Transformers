@@ -9,6 +9,6 @@ typora-copy-images-to: images
 
 
 
-![image-20220212132958940](images\image-20220212132958940.png)
+![image-20220212132958940](images/image-20220212132958940.png)
 
 图P-1  来自GitHub Copilot的一个例子，给定任务的简要描述，应用程序为整个类提供了一个建议（下面的所有类都是自动生成的）。
