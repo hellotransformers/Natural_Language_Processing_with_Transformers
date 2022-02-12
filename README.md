@@ -19,3 +19,7 @@
 
 ## 访问 [目录](toc.md)
 
+### Progress 
+
+Chapter 1 done.
+Chapter 2 doing.
