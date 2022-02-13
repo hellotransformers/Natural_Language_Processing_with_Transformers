@@ -48,4 +48,4 @@
 
 探讨了Transformers所面临的挑战和该研究领域的一些令人兴奋的新方向。
 
-## [致谢](thanks.md)
+## [致谢](thanks.md) [done]
