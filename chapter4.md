@@ -134,7 +134,7 @@ pd.DataFrame([de_example["tokens"], de_example["ner_tags_str"]], ['Tokens', 'Tag
 
 LOC标签的存在是有意义的，因为句子 "2,000 Einwohnern an der Danziger Bucht in der polnischen Woiwodschaft Pommern "在英语中是指 "波兰波美拉尼亚省格但斯克湾的2,000名居民"，而格但斯克湾是波罗的海的一个海湾，而 "voivodeship "对应的是波兰的一个州。
 
-作为快速检查，我们没有在标签中出现任何不寻常的不平衡，让我们计算每个实体在每个分裂中的频率:
+作为快速检查，我们没有在标签中出现任何不寻常的不平衡，让我们计算每个实体在每个子集中的频率:
 
 
 
