@@ -2,11 +2,11 @@
 
 
 
-## 第1章 ["Hello，Transformers"](chapter1.md)
+## 第1章 ["Hello，Transformers"](chapter1.md) [done]
 
 介绍了Transformers并将其置于背景之中。 它还提供了一个关于 "Hugging face"生态系统的介绍。 
 
-##  第2章，[文本分类](chapter2.md)
+##  第2章，[文本分类](chapter2.md)  [done]
 
 重点是情感分析的任务（一个常见的文本分类问题），并介绍了Trainer API。 
 
@@ -14,7 +14,7 @@
 
 更深入地探讨Transformer架构，为后面的章节做准备。 
 
-##  第4章 [多语言命名实体识别](chapter4.md)
+##  第4章 [多语言命名实体识别](chapter4.md) [done]
 
 侧重于识别多语言文本中的实体的任务（一个标记分类问题）。 
 
