@@ -74,7 +74,7 @@ for lang, frac in zip(langs, fracs):
 
 ```
 
-在这里，我们使用shuffle()方法来确保我们不会意外地偏离我们的数据集拆分，而select()允许我们根据fracs中的值对每个语料库进行降样。 让我们通过访问Dataset.num_rows属性来看看我们在训练集中每个语言有多少个例子:
+在这里，我们使用shuffle()方法来确保我们不会意外地偏离我们的数据集拆分，而select()允许我们根据fracs中的值对每个语料库进行欠采样。 让我们通过访问Dataset.num_rows属性来看看我们在训练集中每个语言有多少个例子:
 
 ```
 import pandas as pd 
