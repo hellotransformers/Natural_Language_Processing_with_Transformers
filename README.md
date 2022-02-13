@@ -2,7 +2,7 @@
 
 ## Building Language Applications with Hugging Face 
 
-### Lewis Tunstall, Leandro von Werra, and Thomas Wolf  （Hugging face Transformer库作者 , 详情：(作者介绍)[authors.md]）
+### Lewis Tunstall, Leandro von Werra, and Thomas Wolf  （Hugging face Transformer库作者 , 详情：[作者介绍](authors.md)）
 ### Aurélien Géron 《Hands-on Machine Learning with Scikit-Learn and TensorFlow》作者 撰写前言。
 
 
