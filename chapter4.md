@@ -68,7 +68,9 @@ for lang, frac in zip(langs, fracs):
 	ds = load_dataset("xtreme", name=f"PAN-X.{lang}") 
 	# Shuffle and downsample each split according to spoken proportion 
 	for split in ds: 
-		panx_ch[lang][split] = ( ds[split] .shuffle(seed=0) .select(range(int(frac * ds[split].num_rows))))
+		panx_ch[lang][split] = ( ds[split] 
+		.shuffle(seed=0) 
+		.select(range(int(frac * ds[split].num_rows))))
 
 ```
 
