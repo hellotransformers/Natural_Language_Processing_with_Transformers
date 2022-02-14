@@ -111,7 +111,7 @@ summaries["t5"] = "\n".join(sent_tokenize(pipe_out[0]["summary_text"]))
 
 ```
 
-![image-20220215060917402](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215060917402.png)
+![image-20220215060917402](images/chapter6/image-20220215060917402.png)
 
 **BART**
 
@@ -130,7 +130,7 @@ summaries["bart"] = "\n".join(sent_tokenize(pipe_out[0]["summary_text"]))
 
 与BART一样，PEGASUS是一个编码器-解码器转化器。如图6-2所示，它的预训练目标是预测多句子文本中的遮蔽句子。作者认为，预训练目标越接近下游任务，其效果就越好。为了找到一个比一般语言建模更接近文本摘要的预训练目标，他们在一个非常大的语料库中自动识别了包含其周围段落大部分内容的句子（使用文本摘要评价指标作为内容重叠的启发式方法），并预训练了PEGASUS模型来重建这些句子，从而获得了一个最先进的文本摘要模型。
 
-![image-20220215061100700](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215061100700.png)
+![image-20220215061100700](images/chapter6/image-20220215061100700.png)
 
 这个模型对换行符有一个特殊的标记，这就是为什么我们不需要send_tokenize()函数:
 
@@ -191,27 +191,27 @@ BLEU的概念很简单：我们不是看生成的文本中有多少个标记与�
 
 从这个简单的例子中，我们可以计算出如下的精度值:
 
-![image-20220215061748725](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215061748725.png)
+![image-20220215061748725](images/chapter6/image-20220215061748725.png)
 
 我们可以看到，简单的修正已经产生了一个更合理的值。现在让我们扩展一下，不仅要看单字，还要看n-grams。假设我们有一个生成的句子，snt，我们想和一个参考句子，snt′进行比较。我们提取所有可能的n度的n-grams，并进行核算，以获得精度pn:
 
-![image-20220215061816714](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215061816714.png)
+![image-20220215061816714](images/chapter6/image-20220215061816714.png)
 
 为了避免奖励重复的世代，分子中的计数被剪掉了。这意味着，一个ngram的出现次数以它在参考句中出现的次数为上限。还要注意的是，在这个公式中，句子的定义不是很严格，如果你有一个跨越多个句子的生成文本，你会把它当作一个句子。
 
 一般来说，在我们想要评估的测试集中有不止一个样本，所以我们需要通过对语料库C中的所有样本进行求和来稍微扩展这个方程:
 
-![image-20220215062110066](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215062110066.png)
+![image-20220215062110066](images/chapter6/image-20220215062110066.png)
 
 我们就快到了。由于我们不是在看召回率，所有生成的短而精确的序列与长的句子相比都有好处。因此，精度得分有利于短的生成。为了弥补这一点，BLEU的作者引入了一个额外的术语，即简洁性惩罚:
 
-![image-20220215062147564](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215062147564.png)
+![image-20220215062147564](images/chapter6/image-20220215062147564.png)
 
 通过取最小值，我们确保这个惩罚永远不会超过1，而且当生成的文本lgen的长度小于参考文本lref时，指数项会变得指数级小。在这一点上，你可能会问，为什么我们不直接使用类似F-score的东西来考虑召回率呢？答案是，在翻译数据集中通常有多个参考句子，而不是只有一个，所以如果我们也衡量召回率，我们就会激励那些使用所有参考句子的翻译。因此，最好是在翻译中寻找高精确度，并确保翻译和参考文献有相似的长度。
 
 最后，我们可以把所有东西放在一起，得到BLEU分数的方程式:
 
-![image-20220215062254965](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215062254965.png)
+![image-20220215062254965](images/chapter6/image-20220215062254965.png)
 
 最后一项是修改后的精度的几何平均值，直到n-gram N。在实践中，BLEU-4得分经常被报告。然而，你可能已经看到这个指标有很多局限性；例如，它没有考虑到同义词，而且在推导过程中的许多步骤似乎是临时的、相当脆弱的启发式方法。你可以在Rachel Tatman的博文[《评估NLP中的文本输出：BLEU由你自己承担风险》](https://towardsdatascience.com/evaluating-text-output-in-nlp-bleu-at-your-own-risk-e8609665a213?gi=a55b8870dca5)中找到关于BLEU缺陷的精彩阐述。
 
@@ -239,7 +239,7 @@ pd.DataFrame.from_dict(results, orient="index", columns=["Value"])
 
 ```
 
-![image-20220215063244700](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215063244700.png)
+![image-20220215063244700](images/chapter6/image-20220215063244700.png)
 
 **注意事项**
 
@@ -257,7 +257,7 @@ pd.DataFrame.from_dict(results, orient="index", columns=["Value"])
 
 ```
 
-![image-20220215063533269](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215063533269.png)
+![image-20220215063533269](images/chapter6/image-20220215063533269.png)
 
 我们观察到，精度分数要好得多。预测中的1-词组都是匹配的，只有在精度分数中我们才看到有什么不对劲。对于4-gram来说，只有两个候选词，["the", "cat", "is", "on"]和["cat", "is", "on", "mat"]，其中最后一个词不匹配，因此精度为0.5。
 
@@ -269,13 +269,13 @@ BLEU分数被广泛用于评估文本，特别是在机器翻译中，因为精�
 
 ROUGE分数是专门为文本摘要等应用而开发的，在这些应用中，高召回率比精确率更重要。该方法与BLEU分数非常相似，我们查看不同的n-grams，并比较它们在生成文本和参考文本中的出现率。不同的是，在ROUGE中，我们检查参考文本中有多少个ngrams也出现在生成的文本中。对于BLEU，我们看的是生成文本中有多少个n-grams出现在参考文本中，因此我们可以重新使用精度公式，并稍作修改，将参考n-grams在生成文本中的出现次数计入分母:
 
-![image-20220215063652893](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215063652893.png)
+![image-20220215063652893](images/chapter6/image-20220215063652893.png)
 
 这就是ROUGE的最初提议。随后，研究人员发现，完全去除精度会产生强烈的负面效应。回到没有剪切计数的BLEU公式，我们也可以测量精度，然后我们可以将精度和召回率的ROUGE分数合并到调和平均数中，得到一个F-score。这个分数是现今通常报告的ROUGE的指标。
 
 在ROUGE中，有一个单独的分数来衡量最长的共同子串（LCS），称为ROUGE-L。LCS可以为任何一对字符串计算。例如，"abab "的LCS和它的长度是2。如果我们想在两个样本之间比较这个值，我们需要以某种方式使其正常化，因为否则的话，一个较长的文本将处于优势地位。为了实现这一点，ROUGE的发明者想出了一个类似于F-score的方案，其中LCS被归一化为参考和生成文本的长度，然后这两个归一化的分数被混合在一起:
 
-![image-20220215063817028](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215063817028.png)
+![image-20220215063817028](images/chapter6/image-20220215063817028.png)
 
 这样一来，LCS的得分就被适当地规范化了，可以在不同的样本之间进行比较。在Datasets的实现中，计算了两种不同的ROUGE：一种是计算每个句子的得分并对摘要进行平均（ROUGE-L），另一种是直接对整个摘要进行计算（ROUGE-Lsum）。
 
@@ -303,7 +303,7 @@ pd.DataFrame.from_records(records, index=summaries.keys())
 
 ```
 
-![image-20220215064454819](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215064454819.png)
+![image-20220215064454819](images/chapter6/image-20220215064454819.png)
 
 **注意事顶**
 
@@ -335,7 +335,7 @@ rouge_dict = dict((rn, score[rn].mid.fmeasure) for rn in rouge_names) pd.DataFra
 
 ```
 
-![image-20220215064915879](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215064915879.png)
+![image-20220215064915879](images/chapter6/image-20220215064915879.png)
 
 分数大多比前一个例子差，但仍然比GPT-2取得的分数好！这就是为什么我们要用GPT-2来评价PEGASUS模型。现在让我们实现同样的评价函数来评价PEGASUS模型：
 
@@ -373,7 +373,7 @@ pd.DataFrame(rouge_dict, index=["pegasus"])
 
 ```
 
-![image-20220215065213812](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215065213812.png)
+![image-20220215065213812](images/chapter6/image-20220215065213812.png)
 
 这些数字与公布的结果非常接近。这里需要注意的一点是，损失和每个标记的准确性在一定程度上与ROUGE分数脱钩。损失是独立于解码策略的，而ROUGE分数是强耦合的。
 
@@ -444,7 +444,7 @@ rouge_dict = dict((rn, score[rn].mid.fmeasure) for rn in rouge_names) pd.DataFra
 
 ```
 
-![image-20220215065640986](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215065640986.png)
+![image-20220215065640986](images/chapter6/image-20220215065640986.png)
 
 嗯，结果不是很好，但这并不意外，因为我们已经远离了CNN/DailyMail的数据分布。尽管如此，在训练前设置评估流水线有两个好处：我们可以直接用指标来衡量训练的成功与否，而且我们有一个好的基线。在我们的数据集上对模型进行微调，应该会使ROUGE指标立即得到改善，如果不是这样，我们就知道我们的训练循环出了问题。
 
@@ -468,7 +468,7 @@ plt.show()
 
 ```
 
-![image-20220215065838190](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215065838190.png)
+![image-20220215065838190](images/chapter6/image-20220215065838190.png)
 
 我们看到，大多数对话比CNN/DailyMail的文章短得多，每个对话有100-200个标记。同样，摘要也短得多，大约有20-40个符号（一条推文的平均长度）。
 
@@ -490,7 +490,7 @@ dataset_samsum_pt.set_format(type="torch", columns=columns)
 
 现在，我们需要创建数据整理器。这个函数在训练器中被调用，就在批处理被送入模型之前。在大多数情况下，我们可以使用默认的整理器，它从批次中收集所有的张量并简单地堆叠起来。对于文本摘要任务，我们不仅需要堆叠输入，还需要在解码器一侧准备目标。PEGASUS是一个编码器-解码器转化器，因此具有经典的seq2seq架构。在seq2seq设置中，一个常见的方法是在解码器中应用 "教师强制"。在这种策略下，解码器收到的输入标记（如GPT-2等纯解码器模型），除了编码器的输出外，还包括移一的标签；因此，在对下一个标记进行预测时，解码器得到移一的基础事实作为输入，如下表所示:
 
-![image-20220215070043265](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215070043265.png)
+![image-20220215070043265](images/chapter6/image-20220215070043265.png)
 
 我们将其移位，使解码器只看到以前的地面真实标签，而不是现在或未来的标签。仅仅移位就足够了，因为解码器有掩蔽的自我注意力，可以掩蔽现在和未来的所有输入。
 
@@ -534,7 +534,7 @@ rouge_dict = dict((rn, score[rn].mid.fmeasure) for rn in rouge_names) pd.DataFra
 
 ```
 
-![image-20220215070348031](D:\Natural_Language_Processing_with_Transformers\images\chapter6\image-20220215070348031.png)
+![image-20220215070348031](images/chapter6/image-20220215070348031.png)
 
 我们看到，ROUGE的分数比没有微调的模型有了很大的提高，所以即使之前的模型也是为文本摘要而训练的，但它并没有很好地适应新的领域。让我们把我们的模型推到Hub上:
 
