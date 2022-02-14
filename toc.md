@@ -10,7 +10,7 @@
 
 重点是情感分析的任务（一个常见的文本分类问题），并介绍了Trainer API。 
 
-##  第3章，[Transformers架构剖析](chapter3.md)
+##  第3章，[Transformers架构剖析](chapter3.md) [done]
 
 更深入地探讨Transformer架构，为后面的章节做准备。 
 
