@@ -37,7 +37,7 @@ chapter 4 done.
 
 chapter 5 done.
 
-chapter 6 doing.
+chapter 6 done.
 
 chapter 7 done.
 
