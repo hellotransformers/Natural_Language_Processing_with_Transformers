@@ -22,6 +22,8 @@
 
 ### 进度条 ----------
 
+标注为TBD的章节暂时不会翻译，招志愿者
+
 Chapter 1 done.
 
 Chapter 2 done.
@@ -36,11 +38,11 @@ chapter 6 doing.
 
 chapter 7 done.
 
-chapter 8 doing.
+chapter 8 TBD
 
-chapter 9 doing.
+chapter 9 TBD
 
-chapter 10 doing.
+chapter 10 TBD
 
 chapter 11 done.
 
