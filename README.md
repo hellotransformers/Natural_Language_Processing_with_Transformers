@@ -24,7 +24,7 @@ Chapter 1 done.
 
 Chapter 2 done.
 
-chapter 3 doing.
+chapter 3 done.
 
 chapter 4 done.
 
