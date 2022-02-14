@@ -35,3 +35,6 @@ chapter 5 done.
 chapter 7 done.
 
 chapter 11 done.
+
+## 其它资源 
+[Transformer 上手教程](https://datawhalechina.github.io/learn-nlp-with-transformers/#/)
