@@ -43,7 +43,7 @@ chapter 7 done.
 
 chapter 8 TBD
 
-chapter 9 TBD
+chapter 9 done.
 
 chapter 10 TBD
 
