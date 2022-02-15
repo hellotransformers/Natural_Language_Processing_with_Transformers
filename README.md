@@ -10,7 +10,7 @@
 
 2022年新书《用Transformers处理自然语言 - 创建基于hugging face transformer程序库的自然语言处理程序》 中文翻译版
 
-[下载PDF](releases/download/1.0_beta/transformers.pdf)
+[下载PDF](https://github.com/hellotransformers/Natural_Language_Processing_with_Transformers/releases/download/1.0_beta/transformers.pdf)
 
 出版联系（需要能引进版权的出版社）： znsoft@163.com   Daniel ，微信： znsoft
 
