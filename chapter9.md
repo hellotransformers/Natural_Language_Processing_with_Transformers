@@ -6,7 +6,7 @@
 
 一般来说，表现最好的方法将取决于任务、可用的数据量以及这些数据中被标注的部分。图9-1所示的决策树可以帮助指导我们完成挑选最合适的方法的过程。
 
-![image-20220215072355730](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215072355730.png)
+![image-20220215072355730](images/chapter9/image-20220215072355730.png)
 
 让我们一步步走过这个决策树：
 
@@ -32,7 +32,7 @@
 
 如果你导航到Transformers资源库的Issues标签，你会发现像图9-2所示的问题，其中包含一个标题、一个描述和一组标签或描述该问题的标签。这表明有一种自然的方式来构建监督学习任务：给定一个问题的标题和描述，预测一个或多个标签。由于每个问题可以被分配不同数量的标签，这意味着我们正在处理一个多标签文本分类问题。这通常比我们在第二章中遇到的多类问题更具挑战性，在第2章中，每条推文只被分配给一种情绪。
 
-![image-20220215072824787](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215072824787.png)
+![image-20220215072824787](images/chapter9/image-20220215072824787.png)
 
 现在我们已经看到了GitHub问题的模样，让我们看看如何下载它们来创建我们的数据集。
 
@@ -71,7 +71,7 @@ df_issues.loc[2, cols].to_frame()
 
 ```
 
-![image-20220215073115724](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215073115724.png)
+![image-20220215073115724](images/chapter9/image-20220215073115724.png)
 
 标签列是我们感兴趣的东西，每一行都包含一个JSON对象的列表，其中有关于每个标签的元数据:
 
@@ -97,7 +97,7 @@ df_issues[["labels"]].head()
 
 ```
 
-![image-20220215073235513](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215073235513.png)
+![image-20220215073235513](images/chapter9/image-20220215073235513.png)
 
 现在，标签栏中的每一行都是GitHub的标签列表，所以我们可以计算每一行的长度，以找出每个问题的标签数量:
 
@@ -106,7 +106,7 @@ df_issues["labels"].apply(lambda x : len(x)).value_counts().to_frame().T
 
 ```
 
-![image-20220215073257537](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215073257537.png)
+![image-20220215073257537](images/chapter9/image-20220215073257537.png)
 
 这表明，大多数问题都有零个或一个标签，而有一个以上标签的则少得多。接下来，让我们看看数据集中最频繁出现的前10个标签。在Pandas中，我们可以通过 "explode  (展开)"标签列来实现，这样列表中的每个标签都会成为一行，然后简单地计算每个标签的出现次数:
 
@@ -119,7 +119,7 @@ Number of labels: 65
 
 ```
 
-![image-20220215073332797](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215073332797.png)
+![image-20220215073332797](images/chapter9/image-20220215073332797.png)
 
 我们可以看到，数据集中有65个独特的标签，这些类别非常不平衡，其中wontfix和model card是最常见的标签。为了使分类问题更容易解决，我们将专注于为标签的一个子集建立一个标签器。例如，一些标签，如Good First Issue或Help Wanted，有可能很难从问题的描述中预测出来，而另一些标签，如model card，可以用一个简单的规则来分类，即检测Hugging Face Hub上何时添加了model card。
 
@@ -144,7 +144,7 @@ df_counts.to_frame().T
 
 ```
 
-![image-20220215073556232](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215073556232.png)
+![image-20220215073556232](images/chapter9/image-20220215073556232.png)
 
 在本章的后面，我们会发现将未标记的问题作为一个单独的训练分割来处理是很有用的，所以我们创建一个新的列，表示该问题是否是未标记的:
 
@@ -156,7 +156,7 @@ df_issues["split"].value_counts().to_frame()
 
 ```
 
-![image-20220215073654838](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215073654838.png)
+![image-20220215073654838](images/chapter9/image-20220215073654838.png)
 
 现在让我们来看一个例子:
 
@@ -206,7 +206,7 @@ plt.show()
 
 ```
 
-![image-20220215073927742](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215073927742.png)
+![image-20220215073927742](images/chapter9/image-20220215073927742.png)
 
 该分布具有许多文本数据集的长尾特征。大多数文本都相当短，但也有超过500字的问题。有一些很长的问题是很常见的，特别是当错误信息和代码片段一起发布时。鉴于大多数转化器模型的上下文大小为512个标记或更大，截断少数长问题不可能影响整体性能。现在我们已经探索并清理了我们的数据集，最后要做的是定义我们的训练集和验证集，以便为我们的分类器设定基准。让我们来看看如何做到这一点。
 
@@ -386,7 +386,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Naive Bayes")
 
 ```
 
-![image-20220215075403491](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215075403491.png)
+![image-20220215075403491](images/chapter9/image-20220215075403491.png)
 
 请注意，我们将样本的数量绘制在对数刻度上。从图中我们可以看到，随着训练样本数量的增加，微观和宏观的F-scores都有所提高。由于可以训练的样本太少，结果也略显嘈杂，因为每个片断都可能有不同的类别分布。尽管如此，这里最重要的是趋势，所以现在让我们看看这些结果与基于变压器的方法相比如何吧!
 
@@ -458,7 +458,7 @@ Token animals: 0.006%
 
 如果这两种情况都不适用，那么就会分配中性标签。每种情况的例子见表9-1。
 
-![image-20220215080152836](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215080152836.png)
+![image-20220215080152836](images/chapter9/image-20220215080152836.png)
 
 现在，事实证明，我们可以劫持一个在MNLI数据集上训练的模型来建立一个分类器，而根本不需要任何标签！关键的想法是将我们希望分类的文本视为前提。关键的想法是将我们希望分类的文本作为前提，然后将假设表述为：
 
@@ -578,7 +578,7 @@ plt.show()
 
 ```
 
-![image-20220215081026792](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215081026792.png)
+![image-20220215081026792](images/chapter9/image-20220215081026792.png)
 
 从图中我们可以看出，通过选择每个例子中得分最高的标签（顶部1），可以获得最佳结果。考虑到我们的数据集中的大多数例子只有一个标签，这也许并不令人惊讶。现在让我们来比较一下这与设置阈值的区别，这样我们就有可能预测每个例子有一个以上的标签：
 
@@ -599,7 +599,7 @@ plt.show()
 
 ```
 
-![image-20220215081127519](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215081127519.png)
+![image-20220215081127519](images/chapter9/image-20220215081127519.png)
 
 ```
 best_t, best_micro = thresholds[np.argmax(micros)], np.max(micros) 
@@ -626,7 +626,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Zero Shot")
 
 ```
 
-![image-20220215081325505](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215081325505.png)
+![image-20220215081325505](images/chapter9/image-20220215081325505.png)
 
 对比零次拍摄的流水线和基线，我们观察到两件事:
 
@@ -673,7 +673,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Zero Shot")
 
 这些转换的例子见表9-2。关于NLP的其他数据增强技术的详细列表，我们建议阅读Amit Chaudhary的博文 "[A Visual Survey of Data Augmentation in NLP](https://oreil.ly/j6euX)"。
 
-![image-20220215082024458](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215082024458.png)
+![image-20220215082024458](images/chapter9/image-20220215082024458.png)
 
 
 
@@ -731,7 +731,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Naive Bayes + Aug")
 
 ```
 
-![image-20220215082322966](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215082322966.png)
+![image-20220215082322966](images/chapter9/image-20220215082322966.png)
 
 
 
@@ -755,7 +755,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Naive Bayes + Aug")
 
 这个过程如图9-3所示，它显示了标签数据是如何被嵌入模型并与标签一起存储的。当一个新的文本需要被分类时，它也被嵌入，并根据最近的邻居的标签给出标签。校准要搜索的邻居的数量是很重要的，因为太少可能会有噪音，太多可能会混入邻居组。
 
-![image-20220215082521642](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215082521642.png)
+![image-20220215082521642](images/chapter9/image-20220215082521642.png)
 
 
 
@@ -919,7 +919,7 @@ plt.show()
 
 ```
 
-![image-20220215101419621](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215101419621.png)
+![image-20220215101419621](images/chapter9/image-20220215101419621.png)
 
 从图中我们可以看出，有一个模式：对于给定的k，选择m过大或过小都会产生次优结果。当选择大约m/k=1/3的比例时，会产生最佳的性能。让我们看看哪一个k和m在整体上能产生最好的结果:
 
@@ -963,7 +963,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Embedding")
 
 
 
-![image-20220215101642477](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215101642477.png)
+![image-20220215101642477](images/chapter9/image-20220215101642477.png)
 
 
 
@@ -983,12 +983,12 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Embedding")
 
 我们在第七章中第一次接触到FAISS，在那里我们用它通过DPR嵌入来检索文档。这里我们将简要地解释FAISS库是如何工作的，以及为什么它是ML工具箱中的一个强大工具。我们习惯于在巨大的数据集上进行快速的文本查询，如维基百科或网络上的搜索引擎，如谷歌。当我们从文本转移到嵌入时，我们希望保持这种性能；然而，用于加快文本查询的方法并不适用于嵌入。为了加快文本搜索的速度，我们通常会创建一个倒置的索引，将术语映射到文档。倒置索引的工作原理类似于书末的索引：每个词都被映射到它所出现的页面（或者在我们的例子中，是文档）。当我们以后运行一个查询时，我们可以快速查找搜索词出现在哪些文档中。这对离散的对象（如单词）很有效，但对连续的对象（如矢量）则无效。每个文档都可能有一个独特的向量，因此索引将永远不会与新的向量相匹配。我们不需要寻找精确的匹配，而是需要寻找接近或类似的匹配。当我们想找到数据库中与查询向量最相似的向量时，理论上我们需要将查询向量与数据库中的每个向量进行比较。对于像本章中的小数据库来说，这是没有问题的，但是如果我们将其扩大到几千甚至几百万条，我们就需要等待一段时间来处理每个查询。FAISS通过一些技巧来解决这个问题。主要的想法是对数据集进行分区。如果我们只需要将查询向量与数据库的一个子集进行比较，我们可以大大加快处理速度。但是，如果我们只是随机地对数据集进行分区，我们如何决定搜索哪个分区，以及我们对找到最相似的条目有何保证？显然，一定有一个更好的解决方案：对数据集进行kmeans聚类！这是对数据集的聚类。这将嵌入物按相似度聚成一组。此外，对于每个组，我们得到一个中心点向量，它是该组所有成员的平均值（图9-4）。
 
-![image-20220215101845554](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215101845554.png)
+![image-20220215101845554](images/chapter9/image-20220215101845554.png)
 
 
 鉴于这样的分组，在n个向量中搜索就容易多了：我们首先在k个中心点中搜索与我们的查询最相似的那个（k个比较），然后在组内搜索（元素比较）。这就把比较的数量从n减少到k+(n/k) 。那么问题来了，k的最佳选择是什么？如果它太小，每组仍然包含许多样本，我们需要在第二步进行比较，如果k太大，有许多中心点我们需要搜索。寻找函数f（k）=k+ (n/k) 关于k的最小值，我们发现k=√n。事实上，我们可以用下面的图形直观地说明这一点，n=2^20。
 
-![image-20220215101959379](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215101959379.png)
+![image-20220215101959379](images/chapter9/image-20220215101959379.png)
 
 
 
@@ -1096,7 +1096,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Fine-tune (vanilla)")
 
 
 
-![image-20220215103020543](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215103020543.png)
+![image-20220215103020543](images/chapter9/image-20220215103020543.png)
 
 
 
@@ -1195,7 +1195,7 @@ pd.DataFrame({ "Original tokens": tokenizer.convert_ids_to_tokens(inputs["input_
 
 
 
-![image-20220215103800026](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215103800026.png)
+![image-20220215103800026](images/chapter9/image-20220215103800026.png)
 
 我们看到对应于感叹号的令牌已经被替换成了一个屏蔽令牌。此外，数据整理器返回了一个标签数组，其中原始令牌为-100，被屏蔽的令牌为令牌ID。正如我们之前看到的，在计算损失时，包含-100的条目被忽略。让我们把数据整理器的格式换回PyTorch：
 
@@ -1243,7 +1243,7 @@ plt.show()
 
 ```
 
-![image-20220215104139493](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215104139493.png)
+![image-20220215104139493](images/chapter9/image-20220215104139493.png)
 
 
 
@@ -1286,7 +1286,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Fine-tune (DA)")
 
 ```
 
-![image-20220215105444900](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215105444900.png)
+![image-20220215105444900](images/chapter9/image-20220215105444900.png)
 
 这突出表明，领域适应可以通过未标记的数据和少量的努力为模型的性能提供轻微的提升。自然，未标注的数据越多，标注的数据越少，你用这种方法得到的影响就越大。在结束本章之前，我们将向你展示一些利用无标签数据的更多技巧。
 
@@ -1300,7 +1300,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Fine-tune (DA)")
 
 无监督数据增强（UDA）的关键思想是，一个模型的预测对于一个没有标签的例子和一个稍微扭曲的例子应该是一致的。这种扭曲是通过标准的数据增强策略引入的，如标记替换和回译。然后，通过最小化原始例子和扭曲的例子的预测之间的KL分歧来强制实现一致性。这个过程如图9-5所示，其中一致性要求是通过增加交叉熵损失和来自未标记的例子的额外项来实现的。这意味着，我们用标准的监督方法在有标签的数据上训练一个模型，但限制该模型对无标签的数据做出一致的预测。
 
-![image-20220215105735379](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215105735379.png)
+![image-20220215105735379](images/chapter9/image-20220215105735379.png)
 
 
 
@@ -1316,7 +1316,7 @@ plot_metrics(micro_scores, macro_scores, train_samples, "Fine-tune (DA)")
 
 这种方法的一个有趣的方面是伪标签是如何产生的：为了得到模型预测的不确定性测量，在开启滤波的情况下，同一输入被多次送入模型。然后，预测的方差可以代表模型对特定样本的确定性。有了这个不确定性的测量，假标签就可以用一种叫做 "基于分歧的贝叶斯主动学习"（BALD）的方法进行采样。图9-6说明了完整的训练流水线。
 
-![](D:\Natural_Language_Processing_with_Transformers\images\chapter9\image-20220215105844174.png)
+![](images/chapter9/image-20220215105844174.png)
 
 通过这种迭代方案，教师模型在创建伪标签方面不断变得更好，从而提高了模型的性能。最后，这种方法在数千个样本的完整训练数据上训练出来的模型中只占百分之几，甚至在几个数据集上击败了UDA。
 
