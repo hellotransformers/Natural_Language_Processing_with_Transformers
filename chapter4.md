@@ -210,7 +210,7 @@ xlmr_tokens = xlmr_tokenizer(text).tokens()
 
 ![image-20220213161254375](images/chapter4/image-20220213161254375.png)
 
-这里我们看到，XLM-R使用<s>和<s>来表示一个序列的开始和结束，而不是BERT用于句子分类任务的[CLS]和[SEP]标记。 这些令牌是在标记化的最后阶段添加的，我们接下来会看到。
+这里我们看到，XLM-R使用< s>和< /s>来表示一个序列的开始和结束，而不是BERT用于句子分类任务的[CLS]和[SEP]标记。 这些令牌是在标记化的最后阶段添加的，我们接下来会看到。
 
 ### 标记器流水线
 
@@ -240,7 +240,7 @@ xlmr_tokens = xlmr_tokenizer(text).tokens()
 
 
 
-回到我们对XLM-R和BERT的比较，我们现在明白SentencePiece在后处理步骤中添加了<s>和<s>，而不是[CLS]和[SEP]（作为惯例，我们将在图形说明中继续使用[CLS]和[SEP]）。让我们回到SentencePiece标记器，看看它的特殊之处。
+回到我们对XLM-R和BERT的比较，我们现在明白SentencePiece在后处理步骤中添加了< s>和< /s>，而不是[CLS]和[SEP]（作为惯例，我们将在图形说明中继续使用[CLS]和[SEP]）。让我们回到SentencePiece标记器，看看它的特殊之处。
 
 ### SentencePiece标记器
 
