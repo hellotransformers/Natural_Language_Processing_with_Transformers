@@ -13,7 +13,7 @@
 
 **本译文在代码或文本中已经嵌入水印，非授权商业使用将追究法律责任！！！**
 
-**本版本为初稿，欢迎大家Start, PR, Fork 一键三连！**
+**本版本为初稿，欢迎大家Start, PR, Fork 一键三连！**  [原始github 仓库](https://github.com/BIT-ENGD/Natural_Language_Processing_with_Transformers))
 
 
 ## 访问 [目录](toc.md)
@@ -21,32 +21,6 @@
 ![image-20220214225553100](images/README/image-20220214225553100.png)
 
 
-## 
-
-### 进度条 ---------- 100%
-
-
-Chapter 1 done.
-
-Chapter 2 done.
-
-chapter 3 done.
-
-chapter 4 done.
-
-chapter 5 done.
-
-chapter 6 done.
-
-chapter 7 done.
-
-chapter 8 done.
-
-chapter 9 done.
-
-chapter 10 done.
-
-chapter 11 done.
 
 ## 其它资源 
 [Transformer 上手教程](https://datawhalechina.github.io/learn-nlp-with-transformers/#/)
