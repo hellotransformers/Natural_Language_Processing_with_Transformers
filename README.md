@@ -23,9 +23,8 @@
 
 ## 
 
-### 进度条 ----------
+### 进度条 ---------- 100%
 
-标注为TBD的章节暂时不会翻译，招志愿者
 
 Chapter 1 done.
 
@@ -45,7 +44,7 @@ chapter 8 done.
 
 chapter 9 done.
 
-chapter 10 doing.
+chapter 10 done.
 
 chapter 11 done.
 
