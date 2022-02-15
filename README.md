@@ -18,7 +18,7 @@
 
 ## 本版本为初稿，欢迎大家Start, PR, Fork 一键三连！
 
-**[原始github 仓库](https://github.com/BIT-ENGD/Natural_Language_Processing_with_Transformers))**
+**[原始github 仓库](https://github.com/BIT-ENGD/Natural_Language_Processing_with_Transformers)**
 
 
 ## 访问 [目录](toc.md)
