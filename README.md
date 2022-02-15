@@ -41,11 +41,11 @@ chapter 6 done.
 
 chapter 7 done.
 
-chapter 8 TBD
+chapter 8 done.
 
 chapter 9 done.
 
-chapter 10 TBD
+chapter 10 doing.
 
 chapter 11 done.
 
