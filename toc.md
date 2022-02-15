@@ -40,7 +40,7 @@
 
 
 
- ## 第10章 [从零开始训练Transformers](chapter10.md) [TBD]
+ ## 第10章 [从零开始训练Transformers](chapter10.md) [done]
 
 告诉你如何从零开始建立和训练一个用于自动进行Python源代码补全的模型。 我们将研究流式数据集和大规模训练，并建立我们自己的标记器（tokenizer)。 
 
