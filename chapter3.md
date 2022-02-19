@@ -4,7 +4,7 @@
 
 虽然对Transformer架构有深刻的技术理解通常不是使用Transformer和为你的用例微调模型的必要条件，但对于理解和驾驭Transformer的限制以及在新领域使用它们是有帮助的。 
 
-本章还介绍了Transformer的分类法，以帮助你了解近年来出现的各种型号的Transformer。 在深入研究代码之前，让我们先概述一下启动Transformer革命的原始架构。
+本章还介绍了Transformer的体系分类，以帮助你了解近年来出现的各种型号的Transformer。 在深入研究代码之前，让我们先概述一下启动Transformer革命的原始架构。
 
 ## Transformers 架构
 
