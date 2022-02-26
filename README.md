@@ -16,6 +16,8 @@
 
 **本译文在代码或文本中已经嵌入水印，非授权商业使用将追究法律责任！！！**
 
+## [术语表】(terminology.md)
+
 ## 本版本为初稿，欢迎大家Star, PR, Fork 一键三连！
 
 **[原始github 仓库](https://github.com/hellotransformers/Natural_Language_Processing_with_Transformers)**
