@@ -74,7 +74,7 @@ GPT2 size: 124.4M parameters
 
 ```
 
-原始的GPT模型与最小的GPT-2模型大小差不多。现在我们可以从每个模型中生成三种不同的完成度，每个模型都有相同的输入提示:
+原始的GPT模型与最小的GPT-2模型大小差不多。现在我们可以从每个模型中生成三种不同的文本补全结果，每个模型都有相同的输入提示:
 
 ```
 def enum_pipeline_ouputs(pipe, prompt, num_return_sequences): 
