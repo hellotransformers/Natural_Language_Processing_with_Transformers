@@ -85,8 +85,7 @@ prompt = "\nWhen they came back"
 print("GPT completions:\n" + enum_pipeline_ouputs(generation_gpt, prompt, 3)) 
 print("") print("GPT-2 completions:\n" + enum_pipeline_ouputs(generation_gpt2, prompt, 3)) 
 GPT completions: 
-1.
-When they came back. 
+1.When they came back. 
 " we need all we can get, " jason said once they had settled into the back of the truck without anyone stopping them. " after getting out here, it 'll be up to us what to find. for now
 2. When they came back. his gaze swept over her body. he 'd dressed her, too, in the borrowed clothes that she 'd worn for the journey. " i thought it would be easier to just leave you there. " a woman like 
 3. When they came back to the house and she was sitting there with the little boy
