@@ -1,12 +1,16 @@
 # 第5章  文本生成
 
-基于Transformers的语言模型最不可思议的特点之一是它们能够生成与人类所写的文本几乎没有区别的文本。一个著名的例子是OpenAI的GPT-2，它在给出提示时。
+基于Transformers的语言模型最不可思议的特点之一是它们能够生成与人类所写的文本几乎没有区别的文本。一个著名的例子是OpenAI的GPT-2，它在给出以下提示时:
 
-*在一个令人震惊的发现中，科学家发现了一群独角兽，它们生活在安第斯山脉中一个偏远的、以前未曾开发的山谷里。更让研究人员惊讶的是，这些独角兽能说流利的英语。*
+*In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English.*
+
 
 这使得《世界日报》能够发表一篇关于会说话的独角兽的引人注目的新闻报道：
 
-科学家以其独特的角将这一群体命名为 "奥维德独角兽"。这些四角、银白色的独角兽以前不为科学所了解。现在，在将近两个世纪之后，是什么引发了这种奇怪的现象，这个谜团终于被解开了。拉巴斯大学的进化生物学家豪尔赫-佩雷斯博士和几个同伴在探索安第斯山脉时发现了一个小山谷，里面没有其他动物或人类。佩雷斯注意到，山谷里有一个似乎是天然的喷泉，被两座岩石和银雪的山峰所包围。随后，佩雷斯和其他人进一步冒险进入山谷。"佩雷斯说："当我们到达一座山峰的顶部时，水看起来是蓝色的，上面有一些晶体。佩雷斯和他的朋友们在看到独角兽群时感到很惊讶。这些生物可以从空中看到，不用太多移动就能看到它们--它们离得很近，可以触摸到它们的角。在研究这些奇异的生物时，科学家们发现这些生物也说一些相当正规的英语......
+```
+The scientist named the population, after their distinctive horn, Ovid’s Unicorn. These four-horned, silver-white unicorns were previously unknown to science. Now, after almost two centuries, the mystery of what sparked this odd phenomenon is finally solved. Dr. Jorge Pérez, an evolutionary biologist from the University of La Paz, and several companions, were exploring the Andes Mountains when they found a small valley, with no other animals or humans. Pérez noticed that the valley had what appeared to be a natural fountain, surrounded by two peaks of rock and silver snow. Pérez and the others then ventured further into the valley. “By the time we reached the top of one peak, the water looked blue, with some crystals on top,” said Pérez. Pérez and his friends were astonished to see the unicorn herd. These creatures could be seen from the air without having to move too much to see them—they were so close they could touch their horns. While examining these bizarre creatures the scientists discovered that the creatures also spoke some fairly regular English ...
+
+```
 
 这个例子之所以如此引人注目，是因为它是在没有任何明确监督的情况下产生的! 通过简单地学习预测数以百万计的网页文本中的下一个词，GPT-2和它更强大的后代，如GPT-3，能够获得一套广泛的技能和模式识别能力。能被不同类型的输入提示激活的能力。图5-1显示了语言模型在预训练期间有时会接触到一些任务序列，在这些任务中，它们需要仅仅根据上下文来预测下面的标记，如加法、解词和翻译。这使得它们在微调期间或（如果模型足够大）在推理时间有效地转移这些知识。这些任务不是提前选择的，而是在用于训练十亿参数语言模型的巨大语料库中自然出现的。
 
