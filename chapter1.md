@@ -4,7 +4,7 @@
 
 &emsp;&emsp;同时，一种被称为ULMFiT的有效迁移学习方法表明，在一个非常大的、多样化的语料库上训练长短期记忆（LSTM）网络，可以在很少的标注数据下产生最先进的文本分类器。
 
-&emsp;&emsp;这些进展是今天两个最著名的Transformers的催化剂。 生成性预训练变换器（GPT）和变换器的双向编码器表示法（BERT）。 通过将Transformer架构与无监督学习相结合，这些模型消除了从头开始训练特定任务架构的需要，并以明显的优势打破了NLP中几乎所有的基准测试。 自从GPT和BERT发布以来，已经出现了大量的Transformers模型。 图1-1显示了最闪亮模型的发展时间线。
+&emsp;&emsp;这些进展是今天两个最著名的Transformers的催化剂。 生成性预训练Transformers（GPT）和Transformers的双向编码器表示法（BERT）。 通过将Transformer架构与无监督学习相结合，这些模型消除了从头开始训练特定任务架构的需要，并以明显的优势打破了NLP中几乎所有的基准测试。 自从GPT和BERT发布以来，已经出现了大量的Transformers模型。 图1-1显示了最闪亮模型的发展时间线。
 
 ![image-20220212153402809](images/chapter1/image-20220212153402809.png)
 
@@ -115,7 +115,7 @@
 
 
 
-&emsp;&emsp;GPT和BERT为各种NLP基准设定了新的技术状态，并迎来了变压器的时代。
+&emsp;&emsp;GPT和BERT为各种NLP基准设定了新的技术状态，并迎来了Transformers的时代。
 
 &emsp;&emsp;然而，由于不同的研究实验室以不兼容的框架（PyTorch或TensorFlow）发布他们的模型，NLP从业者要将这些模型移植到自己的应用程序中并不容易。 随着Transformers的发布，一个跨越50多个架构的统一的API被逐步建立起来。 本程序库催化了对Transformer研究的爆炸性增长，并迅速渗透到NLP的从业人员，使得今天很容易将这些模型整合到许多现实生活中的应用。 让我们看一看!
 
