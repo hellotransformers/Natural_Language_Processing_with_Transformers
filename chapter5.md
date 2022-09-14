@@ -91,7 +91,8 @@ with torch.no_grad():
 		iteration = dict() 
 		iteration["Input"] = tokenizer.decode(input_ids[0]) 
 		output = model(input_ids=input_ids) 
-		# Select logits of the first batch and the last token and apply softmax 			next_token_logits = output.logits[0, -1, :]
+		# Select logits of the first batch and the last token and apply softmax 			
+		next_token_logits = output.logits[0, -1, :]
 		next_token_probs = torch.softmax(next_token_logits, dim=-1) 
 		sorted_ids = torch.argsort(next_token_probs, dim=-1, descending=True) 
 		# Store tokens with highest probabilities 
