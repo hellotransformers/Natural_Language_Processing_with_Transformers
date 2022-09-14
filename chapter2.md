@@ -243,7 +243,7 @@ plt.show()
 
 从图中我们看到，对于每一种情绪，大多数推文的长度都在15个字左右，最长的推文远远低于DistilBERT的最大上下文大小。 长于模型上下文尺寸的文本需要被截断，如果被截断的文本包含关键信息，就会导致性能损失。 在这种情况下，看起来这不会是一个问题。
 
-现在让我们想一想，如何将这些原始文本转换成适合变形金刚的格式! 既然我们已经不需要DataFrame格式了，那么我们也重新设置一下我们的数据集的输出格式吧:
+现在让我们想一想，如何将这些原始文本转换成适合Transformers的格式! 既然我们已经不需要DataFrame格式了，那么我们也重新设置一下我们的数据集的输出格式吧:
 
 ```
 emotions.reset_format()
@@ -587,7 +587,7 @@ print(emotions_encoded["train"].column_names)
 
 #### 使用预训练模型
 
-&emsp;&emsp;我们将使用变形金刚中另一个方便的自动类，叫做AutoModel。 与AutoTokenizer类类似，AutoModel有一个from_pretrained()方法来加载预训练模型的权重。 让我们用这个方法来加载DistilBERT检查点：
+&emsp;&emsp;我们将使用Transformers中另一个方便的自动类，叫做AutoModel。 与AutoTokenizer类类似，AutoModel有一个from_pretrained()方法来加载预训练模型的权重。 让我们用这个方法来加载DistilBERT检查点：
 
 ```
 from transformers import AutoModel 
@@ -629,7 +629,7 @@ tf_xlmr = TFAutoModel.from_pretrained("xlm-roberta-base", from_pt=True)
 
 ```
 
-正如你所看到的，在《变形金刚》中切换框架是非常简单的。 在大多数情况下，你只需在类中添加一个 "TF "前缀，你就会得到等效的TensorFlow 2.0类。 当我们使用 "pt "时 字符串（例如在下一节），它是PyTorch的简称，只需将其替换为 "tf"，它是TensorFlow的简称。
+正如你所看到的，在Transformers中切换框架是非常简单的。 在大多数情况下，你只需在类中添加一个 "TF "前缀，你就会得到等效的TensorFlow 2.0类。 当我们使用 "pt "时 字符串（例如在下一节），它是PyTorch的简称，只需将其替换为 "tf"，它是TensorFlow的简称。
 
 #### 提取最后一层隐藏状态
 
@@ -1068,7 +1068,7 @@ df_test.sort_values("loss", ascending=True).head(10)
 
 我们现在知道，Joy有时会被误标，模型对预测Sadness的标签最有信心。 有了这些信息，我们可以对我们的数据集进行有针对性的改进，同时也可以关注模型似乎非常有信心的那一类。
 
-在为训练好的模型提供服务之前，最后一步是将其保存起来供以后使用。 变形金刚允许我们通过几个步骤实现这一目标，我们将在下一节向你展示。
+在为训练好的模型提供服务之前，最后一步是将其保存起来供以后使用。 Transformers允许我们通过几个步骤实现这一目标，我们将在下一节向你展示。
 
 #### 保存与分享模型
 
