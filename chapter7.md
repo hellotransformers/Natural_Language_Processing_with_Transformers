@@ -518,7 +518,7 @@ print(retrieved_docs[0])
 
 **TransformersReade**r
 
-基于变形金刚的QA流水线。仅适用于运行推理。
+基于Transformers的QA流水线。仅适用于运行推理。
 
  尽管两个阅读器以相同的方式处理模型的权重，但在预测转换为产生答案的方式上有一些差异。
 
@@ -527,7 +527,7 @@ print(retrieved_docs[0])
 
 
 
-由于我们将在本章的后面对阅读器进行微调，我们将使用FARMReader。和变形金刚一样，为了加载模型，我们只需要在Hugging Face Hub上指定MiniLM检查点以及一些QA专用参数:
+由于我们将在本章的后面对阅读器进行微调，我们将使用FARMReader。和Transformers一样，为了加载模型，我们只需要在Hugging Face Hub上指定MiniLM检查点以及一些QA专用参数:
 
 ```
 from haystack.reader.farm import FARMReader 
