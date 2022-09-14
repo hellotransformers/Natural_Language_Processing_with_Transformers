@@ -188,7 +188,7 @@ XLM-R是多语言NLU任务的最佳选择。 在下一节中，我们将探讨�
 
 ## 标记化详解 （tokenization)
 
-XLM-R没有使用WordPiece标记器，而是使用一个名为SentencePiece的标记器，该标记器是在所有一百种语言的原始文本上训练出来的。 为了感受一下SentencePiece与WordPiece的比较，让我们以通常的方式用变形金刚加载BERT和XLM-R标记器:
+XLM-R没有使用WordPiece标记器，而是使用一个名为SentencePiece的标记器，该标记器是在所有一百种语言的原始文本上训练出来的。 为了感受一下SentencePiece与WordPiece的比较，让我们以通常的方式用Transformers加载BERT和XLM-R标记器:
 
 ```
 from transformers import AutoTokenizer 
