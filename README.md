@@ -1,6 +1,6 @@
 # Natural Language Processing with Transformers
 
-# 用Transformers处理自然语言
+# 用Transformers处理自然语言：用Hugging Face创建自然语言处理程序
 
 ## Natural Language Processing with Transformers: Building Language Applications with Hugging Face 
 
