@@ -279,7 +279,7 @@ class DistillationTrainingArguments(TrainingArguments):
 
 **小技巧**
 
-你也可以用变形器库的Keras API来进行知识蒸馏。要做到这一点，你需要实现一个自定义的Distiller类，重写tf.keras.Model()的train_step()、test_step()和compile() 方法。关于如何做到这一点，请参见Keras文档中的一个例子。
+你也可以用Transformers库的Keras API来进行知识蒸馏。要做到这一点，你需要实现一个自定义的Distiller类，重写tf.keras.Model()的train_step()、test_step()和compile() 方法。关于如何做到这一点，请参见Keras文档中的一个例子。
 
 ### 选择好的学生模型初始化方案
 
@@ -688,7 +688,7 @@ ONNX是一个开放的标准，它定义了一套通用的运算符和通用的�
 
 ![image-20220215174727033](images/chapter8/image-20220215174727033.png)
 
-为了看到ORT的运作，我们需要做的第一件事是将我们的蒸馏模型转换成ONNX格式。变形器库有一个内置函数，叫做convert_graph_to_onnx.convert()，它通过以下步骤简化了这个过程:
+为了看到ORT的运作，我们需要做的第一件事是将我们的蒸馏模型转换成ONNX格式。Transformers库有一个内置函数，叫做convert_graph_to_onnx.convert()，它通过以下步骤简化了这个过程:
 
 1. 将模型初始化为一个管道。
 
