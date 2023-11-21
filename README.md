@@ -5,7 +5,7 @@
 ## Natural Language Processing with Transformers: Building Language Applications with Hugging Face 
 
 ### Lewis Tunstall, Leandro von Werra, and Thomas Wolf  （Hugging face Transformer库作者 , 详情：[作者介绍](authors.md)）
-### Aurélien Géron 《Hands-on Machine Learning with Scikit-Learn and TensorFlow》作者 撰写序。
+###  《Hands-on Machine Learning with Scikit-Learn and TensorFlow》作者 Aurélien Géron 撰写序。
 
 **人工智能博士倾情翻译**
 
