@@ -729,7 +729,7 @@ emotions_hidden["train"].column_names
 import numpy as np 
 X_train = np.array(emotions_hidden["train"]["hidden_state"]) 
 X_valid = np.array(emotions_hidden["validation"]["hidden_state"]) 
-y_train = np.array(emotions_hidden["train"]["label"]
+y_train = np.array(emotions_hidden["train"]["label"])
 y_valid = np.array(emotions_hidden["validation"]["label"]) 
 
 
