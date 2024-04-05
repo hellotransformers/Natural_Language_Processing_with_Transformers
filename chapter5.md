@@ -7,10 +7,7 @@
 
 能够生成一篇关于独角兽的新闻：
 
-*
-The scientist named the population, after their distinctive horn, Ovid’s Unicorn. These four-horned, silver-white unicorns were previously unknown to science. Now, after almost two centuries, the mystery of what sparked this odd phenomenon is finally solved. Dr. Jorge Pérez, an evolutionary biologist from the University of La Paz, and several companions, were exploring the Andes Mountains when they found a small valley, with no other animals or humans. Pérez noticed that the valley had what appeared to be a natural fountain, surrounded by two peaks of rock and silver snow. Pérez and the others then ventured further into the valley. “By the time we reached the top of one peak, the water looked blue, with some crystals on top,” said Pérez. Pérez and his friends were astonished to see the unicorn herd. These creatures could be seen from the air without having to move too much to see them—they were so close they could touch their horns. While examining these bizarre creatures the scientists discovered that the creatures also spoke some fairly regular English ...
-
-*
+*The scientist named the population, after their distinctive horn, Ovid’s Unicorn. These four-horned, silver-white unicorns were previously unknown to science. Now, after almost two centuries, the mystery of what sparked this odd phenomenon is finally solved. Dr. Jorge Pérez, an evolutionary biologist from the University of La Paz, and several companions, were exploring the Andes Mountains when they found a small valley, with no other animals or humans. Pérez noticed that the valley had what appeared to be a natural fountain, surrounded by two peaks of rock and silver snow. Pérez and the others then ventured further into the valley. “By the time we reached the top of one peak, the water looked blue, with some crystals on top,” said Pérez. Pérez and his friends were astonished to see the unicorn herd. These creatures could be seen from the air without having to move too much to see them—they were so close they could touch their horns. While examining these bizarre creatures the scientists discovered that the creatures also spoke some fairly regular English ...*
 
 这个例子之所以如此引人注目，是因为它是在没有任何明确监督的情况下产生的! 通过简单地学习预测数以百万计的网页文本中的下一个词，GPT-2和它更强大的后代，如GPT-3，能够获得一套广泛的技能和模式识别能力。能被不同类型的输入提示激活的能力。图5-1显示了语言模型在预训练期间有时会接触到一些任务序列，在这些任务中，它们需要仅仅根据上下文来预测下面的标记，如加法、解词和翻译。这使得它们在微调期间或（如果模型足够大）在推理时间有效地转移这些知识。这些任务不是提前选择的，而是在用于训练十亿参数语言模型的巨大语料库中自然出现的。
 
@@ -35,7 +32,7 @@ Transformers生成现实文本的能力导致了多样化的应用，如InferKit
 
 ![image-20220214201402795](images/chapter5/image-20220214201402795.png)
 
-其中y<t是序列y1, ..., yt-1的速记符号。正是从这些条件概率中，我们获得了这样的直觉：自回归语言建模相当于在一个句子中给定前面的词来预测每个词；这正是前面方程中右边的概率所描述的。请注意，这个预训练目标与BERT的预训练目标完全不同，BERT利用过去和未来的语境来预测一个被掩盖的标记。
+其中 y<t 是序列y1, ..., yt-1的速记符号。正是从这些条件概率中，我们获得了这样的直觉：自回归语言建模相当于在一个句子中给定前面的词来预测每个词；这正是前面方程中右边的概率所描述的。请注意，这个预训练目标与BERT的预训练目标完全不同，BERT利用过去和未来的语境来预测一个被掩盖的标记。
 
 现在你可能已经猜到我们如何调整这个下一个标记的预测任务，以生成任意长度的文本序列。如图5-3所示，我们从 "变形金刚是 "这样的提示开始，用模型来预测下一个标记。一旦我们确定了下一个标记，我们就把它附加到提示上，然后用新的输入序列来生成另一个标记。我们这样做，直到我们达到一个特殊的序列结束符号或预先定义的最大长度。
 
@@ -67,7 +64,7 @@ Transformers生成现实文本的能力导致了多样化的应用，如InferKit
 
 为了了解贪婪搜索是如何工作的，让我们先用语言建模头加载15亿参数版本的GPT-2：
 
-```
+```py
 import torch 
 from transformers import AutoTokenizer, AutoModelForCausalLM 
 device = "cuda" if torch.cuda.is_available() else "cpu" 
@@ -79,7 +76,7 @@ model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
 现在让我们来生成一些文本! 尽管Transformers为GPT-2这样的自回归模型提供了一个generate()函数，但我们将自己实现这个解码方法，看看引擎盖下发生了什么。为了热身，我们将采取图5-3所示的相同的迭代方法：我们将使用 "变形金刚是 "作为输入提示，并运行八个时间段的解码。在每个时间步骤中，我们为提示中的最后一个符号挑选出模型的对数，并用softmax包起来，得到一个概率分布。然后，我们挑选出概率最高的下一个符号，将其添加到输入序列中，并再次运行该过程。下面的代码完成了这项工作，并且还在每个时间段存储了五个最有可能的标记，这样我们就可以直观地看到备选方案：
 
-```
+```py
 import pandas as pd
 input_txt = "Transformers are the" 
 input_ids = tokenizer(input_txt, return_tensors="pt")["input_ids"].to(device) 
@@ -114,24 +111,26 @@ pd.DataFrame(iterations)
 
 实现贪婪搜索并不难，但我们要使用Transformers内置的generate()函数来探索更复杂的解码方法。为了重现我们的简单例子，让我们 确保采样被关闭（默认情况下是关闭的，除非你加载检查点的模型的具体配置另有规定），并为新生成的标记数量指定max_new_tokens：
 
-```
+```py
 input_ids = tokenizer(input_txt, return_tensors="pt")["input_ids"].to(device) 
 output = model.generate(input_ids, max_new_tokens=n_steps, do_sample=False) 
 print(tokenizer.decode(output[0])) 
-
+```
+```
 Transformers are the most popular toy line in the world,
 
 ```
 
 现在让我们尝试一些更有趣的东西：我们能重现OpenAI的独角兽故事吗？正如我们之前所做的，我们将用标记器对提示进行编码，并且我们将为max_length指定一个较大的值，以生成一个较长的文本序列：
 
-```
+```py
 max_length = 128 
 input_txt = """In a shocking finding, scientist discovered \ a herd of unicorns living in a remote, previously unexplored \ valley, in the Andes Mountains. Even more surprising to the \ researchers was the fact that the unicorns spoke perfect English.\n\n """ 
 input_ids = tokenizer(input_txt, return_tensors="pt")["input_ids"].to(device) 
 output_greedy = model.generate(input_ids, max_length=max_length, do_sample=False) 
 print(tokenizer.decode(output_greedy[0])) 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English. The researchers, from the University of California, Davis, and the University of Colorado, Boulder, were conducting a study on the Andean cloud forest, which is home to the rare species of cloud forest trees. The researchers were surprised to find that the unicorns were able to communicate with each other, and even with humans
 The researchers were surprised to find that the unicorns were able
 
@@ -157,7 +156,7 @@ Beam搜索不是在每一步解码概率最高的标记，而是跟踪前b个最
 
 为什么我们要用对数概率而不是概率本身对序列进行评分？计算一个序列的总体概率P（y1，y2，...，yt|x）涉及计算条件概率P（yt|y<t，x）的乘积是一个原因。由于每个条件概率通常是[0，1]范围内的一个小数字，取它们的乘积会导致总的概率很容易出现下溢。这意味着计算机不能再精确地表示计算的结果。例如，假设我们有一个由t = 1024个标记组成的序列，并慷慨地假设每个标记的概率为0.5。这个序列的总体概率是一个极小的数字：
 
-```
+```py
 0.5 ** 1024 
 5.562684646268003e-309
 
@@ -169,7 +168,7 @@ Beam搜索不是在每一步解码概率最高的标记，而是跟踪前b个最
 
 换句话说，我们之前看到的概率乘积变成了对数概率之和，这就更不可能遇到数字不稳定的情况。例如，计算之前同一个例子的对数概率，可以得到：
 
-```
+```py
 import numpy as np 
 sum([np.log(0.5)] * 1024) 
 -709.7827128933695
@@ -180,7 +179,7 @@ sum([np.log(0.5)] * 1024)
 
 让我们计算并比较贪婪和Beam搜索产生的文本的对数概率，看看Beam搜索是否能提高整体概率。由于Transformers模型返回的是给定输入标记的下一个标记的未归一化对数，我们首先需要将对数归一化，以便为序列中的每个标记创建整个词汇的概率分布。然后，我们需要只选择序列中存在的标记概率。下面的函数实现了这些步骤。
 
-```
+```py
 import torch.nn.functional as F 
 def log_probs_from_logits(logits, labels): 
 	logp = F.log_softmax(logits, dim=-1) 
@@ -191,7 +190,7 @@ def log_probs_from_logits(logits, labels):
 
 这给我们提供了单个标记的对数概率，所以要得到一个序列的总对数概率，我们只需要将每个标记的对数概率相加：
 
-```
+```py
 def sequence_logprob(model, labels, input_len=0): 
 	with torch.no_grad(): 
 		output = model(labels) 
@@ -205,11 +204,12 @@ def sequence_logprob(model, labels, input_len=0):
 
 让我们用这些函数来首先计算OpenAI提示上的贪婪解码器的序列对数概率。
 
-```
+```py
 logp = sequence_logprob(model, output_greedy, input_len=len(input_ids[0])) 
 print(tokenizer.decode(output_greedy[0])) 
 print(f"\nlog-prob: {logp:.2f}") 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English. 
 
 The researchers, from the University of California, Davis, and the University of Colorado, Boulder, were conducting a study on the Andean cloud forest, which is home to the rare species of cloud forest trees. 
@@ -221,12 +221,13 @@ log-prob: -87.43
 
 现在让我们把它与用Beam搜索生成的序列进行比较。要用generate()函数激活Beam搜索，我们只需要用num_beams参数指定波束的数量。我们选择的波束越多，可能得到的结果就越好；然而，生成过程会变得更慢，因为我们为每个波束生成平行序列：
 
-```
+```py
 output_beam = model.generate(input_ids, max_length=max_length, num_beams=5, do_sample=False) 
 logp = sequence_logprob(model, output_beam, input_len=len(input_ids[0]))
 print(tokenizer.decode(output_beam[0])) 
 print(f"\nlog-prob: {logp:.2f}") 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English.
 
 The discovery of the unicorns was made by a team of scientists from the University of California, Santa Cruz, and the National Geographic Society. 
@@ -238,13 +239,14 @@ log-prob: -55.23
 
 我们可以看到，我们用Beam搜索得到的对数概率（越高越好）比用简单的贪婪解码得到的要好。然而，我们可以看到，Beam搜索也受到重复文本的影响。解决这个问题的一个方法是用no_repeat_ngram_size参数施加一个n-gram惩罚，跟踪哪些n-gram已经被看到，并将下一个token的概率设置为零，如果它将产生一个以前看到的n-gram：
 
-```
+```py
 output_beam = model.generate(input_ids, max_length=max_length, num_beams=5, do_sample=False, no_repeat_ngram_size=2) 
 logp = sequence_logprob(model, output_beam, input_len=len(input_ids[0])
 
 print(tokenizer.decode(output_beam[0]))
 print(f"\nlog-prob: {logp:.2f}") 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English. The discovery was made by a team of scientists from the University of California, Santa Cruz, and the National Geographic Society. 
 
 According to a press release, the scientists were conducting a survey of the area when they came across the herd. They were surprised to find that they were able to converse with the animals in English, even though they had never seen a unicorn in person before. The researchers were 
@@ -272,10 +274,11 @@ log-prob: -93.12
 
 为了看看我们如何利用温度来影响生成的文本，让我们通过在generate()函数中设置温度参数，以T=2为例进行采样（我们将在下一节解释top_k参数的含义）：
 
-```
+```py
 output_temp = model.generate(input_ids, max_length=max_length, do_sample=True, temperature=2.0, top_k=0) 
 print(tokenizer.decode(output_temp[0])) 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English. 
 
 While the station aren protagonist receive Pengala nostalgiates tidbitRegarding 
@@ -286,10 +289,11 @@ Jenny loclonju AgreementCON irrational �rite Continent seaf A jer Turner Dorbe
 
 我们可以清楚地看到，高温产生了大部分的胡言乱语；通过强调罕见的标记，我们使模型产生了奇怪的语法和相当多的生造词！让我们看看如果我们把温度降下来会发生什么？让我们看看如果我们降低温度会发生什么：
 
-```
+```py
 output_temp = model.generate(input_ids, max_length=max_length, do_sample=True, temperature=0.5, top_k=0) 
 print(tokenizer.decode(output_temp[0])) 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English. The scientists were searching for the source of the mysterious sound, which was making the animals laugh and cry.
 
 The unicorns were living in a remote valley in the Andes mountains 'When we first heard the noise of the animals, we thought it was a lion or a tiger,' said Luis Guzman, a researcher from the University of Buenos Aires, Argentina.
@@ -316,10 +320,11 @@ Top-k和nucleus（top-p）抽样是两种流行的替代方法或使用温度的
 
 top-k抽样背后的想法是通过只从概率最高的k个标记中抽样来避免低概率的选择。这就在分布的长尾上设置了一个固定的切口，确保我们只从可能的选择中取样。回到图5-6，top-k抽样相当于定义一条垂直线并从左边的标记中抽样。同样，generate()函数通过top_k参数提供了一个简单的方法来实现这一点:
 
-```
+```py
 output_topk = model.generate(input_ids, max_length=max_length, do_sample=True, top_k=50) 
 print(tokenizer.decode(output_topk[0])) 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English.
 
 The wild unicorns roam the Andes Mountains in the region of Cajamarca, on the border with Argentina (Picture: Alamy/Ecole Nationale Supérieure d'Histoire Naturelle) 
@@ -333,10 +338,11 @@ years that
 
 另一种方法是使用动态截断。在核抽样或顶抽样中，我们不是选择一个固定的截断值，而是设定一个截断的时间条件。这个条件就是在选择中达到一定的概率质量时。比方说，我们把这个值设定为95%。然后我们按概率降序排列所有标记，并从列表的顶部开始一个接一个地添加标记，直到所选标记的概率之和达到95%。回到图5-6，p的值在概率累积总和图上定义了一条水平线，我们只从该线以下的标记中取样。根据输出分布，这可能只是一个（非常可能的）标记，也可能是一百个（同样可能的）标记。在这一点上，你可能对generate()函数也提供了一个激活top-p抽样的参数而不感到惊讶。让我们来试试吧:
 
-```
+```py
 output_topp = model.generate(input_ids, max_length=max_length, do_sample=True, top_p=0.90) 
 print(tokenizer.decode(output_topp[0])) 
-
+```
+```
 In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English. 
 
 The scientists studied the DNA of the animals and came to the conclusion that the herd are descendants of a prehistoric herd that lived in Argentina about 50,000 years ago.
