@@ -920,7 +920,8 @@ from transformers import Trainer, TrainingArguments
 batch_size = 64 
 logging_steps = len(emotions_encoded["train"]) // batch_size 
 model_name = f"{model_ckpt}-finetuned-emotion" 
-training_args = TrainingArguments(output_dir=model_name, num_train_epochs=2, learning_rate=2e-5, 	 per_device_train_batch_size=batch_size, per_device_eval_batch_size=batch_size, weight_decay=0.01, evaluation_strategy="epoch", disable_tqdm=False, logging_steps=logging_steps, push_to_hub=True, log_level="error")
+training_args = TrainingArguments(output_dir=model_name, num_train_epochs=2, learning_rate=2e-5,
+ 	 per_device_train_batch_size=batch_size, per_device_eval_batch_size=batch_size, weight_decay=0.01, evaluation_strategy="epoch", disable_tqdm=False, logging_steps=logging_steps, push_to_hub=True, log_level="error")
 
 ```
 
