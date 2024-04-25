@@ -2,4 +2,4 @@
 
 **Leandro von Werra** 是 Hugging Face 开源团队的机器学习工程师。 他有多年的行业经验，通过在整个机器学习堆栈中工作，将NLP项目带入生产，他是流行的Python库TRL的创建者，该库将Transformer与强化学习结合起来。 
 
-**Thomas Wolf** 是 Hugging Face 的首席科学官和联合创始人。 他的团队肩负着催化和平民化NLP研究 （使每个人有条件研究NLP)。 在共同创立 Hugging Face 之前，托马斯获得了物理学博士学位，后来又获得了法律学位。 他曾担任物理学研究人员和欧洲专利律师。
+**Thomas Wolf** 是 Hugging Face 的首席科学官兼联合创始人。 他的团队肩负着催化和平民化NLP研究 （使每个人有条件研究NLP)。 在共同创立 Hugging Face 之前，托马斯获得了物理学博士学位，后来又获得了法律学位。 他曾担任物理学研究人员和欧洲专利律师。
